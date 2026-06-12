@@ -1,0 +1,97 @@
+{% include 'admin_header.html'  %}
+<div class="ftco-blocks-cover-1">
+      <div class="site-section-cover overlay" style="background-image: url('/static/images/hero_1.jpg');height: 600px;">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-5" data-aos="fade-right">
+            	<br><br><br><br>
+              <form method="post">
+				<h2 style="color: #fff;">Manage Packages</h2><br>
+				<table style="color: #fff;width: 500px;" class="table">
+				
+					<tr>
+						<th>Hotel Name</th>
+							{% if data['upack'] %}
+							<td><input type="text" required name="hotel_id" class="form-control"  style="height: 40px;" readonly="" value=" {{ data['upack'][0]['hotel_name'] }}"></td>
+							{% else %}
+						<td>
+							<select name="hotel_id" class="form-control"  style="height: 40px;">
+								<option selected="">Select Hotel</option>
+								{% for row in data['view_hotels'] %}
+								<option value="{{row['hotel_id']}}">{{row['hotel_name']}}</option>
+								{% endfor %}
+							</select>
+						</td>
+						{% endif %}
+					</tr>
+					<tr>
+						<th>Title</th>
+						<td><input type="text"  required name="title" class="form-control"  style="height: 40px;" {% if data['upack'] %} value=" {{data['upack'][0]['title']}}  " {% endif %}></td>
+					</tr>
+					<tr>
+						<th>Description</th>
+						<td><textarea name="des" required class="form-control"  style="height: 40px;">{% if data['upack']%} {{data['upack'][0]['description']}} {% endif %}</textarea></td>
+					</tr>
+					<tr>
+    <th>Amount</th>
+    <td>
+        <input 
+            type="number"  
+            name="amount"
+            required 
+            class="form-control" 
+            style="height: 40px;" 
+            {% if data['upack'] %} value="{{ data['upack'][0]['amount'] }}" {% endif %}
+            pattern="^\d+$"  
+            title="Please enter a numeric value only"  
+            min="0" 
+        >
+    </td>
+</tr>
+
+					<!-- <tr>
+						<th>Amount</th>
+						<td><input type="text" name="amount" required class="form-control"  style="height: 40px;" {% if data['upack'] %} value=" {{ data['upack'][0]['amount'] }} " {% endif %} ></td>
+					</tr> -->
+					<tr>
+						{% if data['upack'] %}
+
+						<td colspan="2" align="center"><input type="submit" class="btn btn-warning" name="upack" value="UPDATE"></td>
+						{% else %}
+						<td colspan="2" align="center"><input type="submit" class="btn btn-success" name="pack" value="ADD"></td>
+
+						{% endif %}
+						
+					</tr>
+				</table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<br><br><br>
+<center>
+<table class="table" style="width: 600px;">
+	<h2>Package Details</h2><br>
+	<tr>
+		<th>Hotel Name</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Amount</th>
+	</tr>
+
+	{% for row in data['view_pack'] %}
+	<tr>
+		<td>{{ row['hotel_name'] }}</td>
+		<td>{{ row['title'] }}</td>
+		<td>{{ row['description'] }}</td>
+		<td>{{ row['amount'] }}</td>
+		<td><a class="btn btn-danger" href="?action=delete&id={{row['package_id']}}">Delete</a></td>
+		<td><a class="btn btn-warning" href="?action=update&id={{row['package_id']}}">Update</a></td>
+	</tr>
+	{% endfor %}
+</table>
+	</center>
+</form>
+<br><br>
+{% include 'footer.html' %}

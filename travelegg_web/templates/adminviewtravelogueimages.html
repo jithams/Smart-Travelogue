@@ -1,0 +1,45 @@
+{% include 'admin_header.html' %}
+<div class="ftco-blocks-cover-1">
+      <div class="site-section-cover overlay" style="background-image: url('/static/images/hero_1.jpg');height: 200px;">
+        <div class="container" style="height: 200px;">
+          <div class="row align-items-center" style="height: 200px;">
+            <div class="col-md-5" data-aos="fade-right">
+             <!--  <h1 class="mb-3 text-white">Let's Enjoy The Wonders of Nature</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis in tenetur doloremque, maiores doloribus officia iste. Dolores.</p>
+              <p class="d-flex align-items-center">
+                <a href="https://vimeo.com/191947042" data-fancybox class="play-btn-39282 mr-3"><span class="icon-play"></span></a> 
+                <span class="small">Watch the video</span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <center>
+	<h2>View Uploaded Files</h2><br>
+	<table class="table" style="width: 700px;">
+		<tr>
+			<th>Uploaded files</th>
+			{{data['val']}}
+		</tr>
+		{% for row in data['viewtravalogue'] %}
+		<tr>
+				{% if row['file_path'].rsplit('.',1)[1] =="mp4" %}
+			<td> <video width="400px" height="240" controls>
+            <source src="/{{ row['file_path'] }}"type="video/mp4"> </video></td>
+            	<td><a href="?tid={{data['val']}}&idds={{ row['upload_id'] }}">Remove</td>
+
+			{% else %}
+			<td><img style="width:400px; height:240;" width="200" src="/{{ row['file_path'] }} "></td>
+			<td><a href="?tid={{data['val']}}&idds={{ row['upload_id'] }}">Remove</td>
+			{% endif %}
+		</tr>
+			
+		
+		{% endfor %}
+	</table>
+	
+</center>
+<br>
+{% include 'footer.html' %}

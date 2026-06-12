@@ -1,0 +1,56 @@
+{% include 'admin_header.html' %}
+<div class="ftco-blocks-cover-1">
+      <div class="site-section-cover overlay" style="background-image: url('/static/images/hero_1.jpg');height: 200px;">
+        <div class="container" style="height: 200px;">
+          <div class="row align-items-center" style="height: 200px;">
+            <div class="col-md-5" data-aos="fade-right">
+             <!--  <h1 class="mb-3 text-white">Let's Enjoy The Wonders of Nature</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis in tenetur doloremque, maiores doloribus officia iste. Dolores.</p>
+              <p class="d-flex align-items-center">
+                <a href="https://vimeo.com/191947042" data-fancybox class="play-btn-39282 mr-3"><span class="icon-play"></span></a> 
+                <span class="small">Watch the video</span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <center>
+<form method="post">
+	<h2>View Travelogues</h2><br>
+	<table class="table" style="width: 700px;">
+		<tr>
+			<th>User</th>
+			<th>Place</th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Date</th>
+			<th>Action</th>
+			
+		</tr>
+		{% for row in data['viewtravalogue'] %}
+		<tr>
+			<td>{{row['name']}}</td>
+			<td>{{row['place_name']}}</td>
+			<td>{{row['title']}}</td>
+			<td>{{row['description']}}</td>
+			<td>{{row['date_time']}}</td>
+			{% if row['t_status']=='block' %}
+			<td><a class="btn btn-danger" href="?action=active&travelogue_id={{row['travelogue_id']}}">Approve</a></td>
+			{% else %}
+			<td>{{row['t_status']}}</td>
+			{% endif %}
+			<td><a href="adminviewtravelogueimages?tid={{row['travelogue_id']}}">Select</td>
+			<td><a href="adminviewtraveloguevideos?tid={{row['travelogue_id']}}"></td>
+			<td><a href="adminviewtraveloguelinks?tid={{row['travelogue_id']}}"></td>
+			
+		</tr>
+		{% endfor %}
+	</table>
+	
+
+</form>
+</center>
+<br>
+{% include 'footer.html' %}

@@ -1,0 +1,47 @@
+{% include 'admin_header.html' %}
+<div class="ftco-blocks-cover-1">
+      <div class="site-section-cover overlay" style="background-image: url('/static/images/hero_1.jpg');height: 200px;">
+        <div class="container" style="height: 200px;">
+          <div class="row align-items-center" style="height: 200px;">
+            <div class="col-md-5" data-aos="fade-right">
+             <!--  <h1 class="mb-3 text-white">Let's Enjoy The Wonders of Nature</h1>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta veritatis in tenetur doloremque, maiores doloribus officia iste. Dolores.</p>
+              <p class="d-flex align-items-center">
+                <a href="https://vimeo.com/191947042" data-fancybox class="play-btn-39282 mr-3"><span class="icon-play"></span></a> 
+                <span class="small">Watch the video</span>
+              </p> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <center>
+<form method="post">
+	<h2 >User Details</h2><br>
+	<table style="width: 900px;" class="table">
+		<tr>
+			<th>User Name</th>
+			<th>House Name</th>
+			<th>Place</th>
+			<th>Phone</th>
+			<th>Email</th>
+			<!-- <th>Location</th> -->
+		</tr>
+		{% for row in data['view_user'] %}
+		<tr>
+			<td>{{row['user_name']}}</td>
+			<td>{{row['house_name']}}</td>
+			<td>{{row['place']}}</td>
+			<td>{{row['phone']}}</td>
+			<td>{{row['email']}}</td>
+			<!-- <td><a class="btn btn-primary" href="http://www.google.com/maps?q={{row['latitude'] }},{{row['longitude']}}">Location </a></td> -->
+		</tr>
+		{% endfor %}
+	</table>
+	
+
+</form>
+</center>
+<br>
+{% include 'footer.html' %}

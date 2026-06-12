@@ -1,0 +1,187 @@
+{% include 'admin_header.html'  %}
+
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+        <script type="text/javascript">
+            // window.onload = function () {
+            function myFunction() {
+                var mapOptions = {
+                    center: new google.maps.LatLng(9.9763482, 76.286272),
+                    zoom: 14,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                var infoWindow = new google.maps.InfoWindow();
+                var latlngbounds = new google.maps.LatLngBounds();
+                var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+                google.maps.event.addListener(map, 'click', function (e) {
+                    alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+                    document.getElementById('slati').value = e.latLng.lat();
+                    document.getElementById('elongi').value = e.latLng.lng();
+
+
+                });
+            }
+        </script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyD3MPnSnyWwNmpnVEFkaddVvy_GWtxSejs&sensor=false"></script>
+<script type="text/javascript">
+            // window.onload = function () {
+            	function myfun() {
+            		var mapOptions = {
+            			center: new google.maps.LatLng(9.9763482, 76.286272),
+            			zoom: 14,
+            			mapTypeId: google.maps.MapTypeId.ROADMAP
+            		};
+            		var infoWindow = new google.maps.InfoWindow();
+            		var latlngbounds = new google.maps.LatLngBounds();
+            		var map = new google.maps.Map(document.getElementById("dvMap"), mapOptions);
+            		google.maps.event.addListener(map, 'click', function (e) {
+            			alert("Latitude: " + e.latLng.lat() + "\r\nLongitude: " + e.latLng.lng());
+            			document.getElementById('slati1').value = e.latLng.lat();
+            			document.getElementById('elongi1').value = e.latLng.lng();
+
+
+            		});
+            	}
+            </script>
+
+             <div class="ftco-blocks-cover-1">
+      <div class="site-section-cover overlay" style="background-image: url('/static/images/hero_1.jpg');height: 850px;">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-5" data-aos="fade-right">
+            	<br><br><br>
+             <form method="post" enctype="multipart/form-data">
+	<h2 style="color: #fff;">Manage Hotels</h2><br>
+	<table>
+		<tr>
+			<td>
+	<table style="color: #fff;width: 500px;" class="table">
+	
+		<tr>
+			<th>Hotel Name</th>
+			<td><input type="text" required name="hname" class="form-control" style="height: 40px;" value="{% if data['uhotel'] %}{{data['uhotel'][0]['hotel_name']}}{% endif %}"></td>
+		</tr>
+		
+		<tr>
+			<th>About</th>
+			<td><textarea name="about" required class="form-control" style="height: 40px;">{% if data['uhotel'] %}{{data['uhotel'][0]['about']}}{% endif %}</textarea></td>
+		</tr>
+		<td><a onclick="myFunction();">View Map</a></td>
+		<tr>
+			<th>Latitude</th>
+			<td><input type="text" required name="lati" class="form-control" readonly="" style="height: 40px;" id="slati" value="{% if data['uhotel'] %}{{data['uhotel'][0]['latitude']}}{% endif %}"></td>
+		</tr>
+		<tr>
+			<th>Longitude</th>
+			<td><input type="text" name="longi" required class="form-control" readonly="" style="height: 40px;" id="elongi" value="{% if data['uhotel'] %}{{data['uhotel'][0]['longitude']}}{% endif %}"></td>
+		</tr>
+		<!-- <tr>
+			<th>Phone</th>
+			<td><input type="number" name="phone" required class="form-control" style="height: 40px;" value="{% if data['uhotel'] %}{{data['uhotel'][0]['phone']}}{% endif %}"></td>
+		</tr> -->
+		<tr>
+    <th>Phone</th>
+    <td>
+        <input 
+            type="tel"  
+            name="phone"
+            required 
+            class="form-control" 
+            style="height: 40px;" 
+            value="{% if data['uhotel'] %}{{ data['uhotel'][0]['phone'] }}{% endif %}"
+            pattern="^[0-9]{10}$"  
+            title="Please enter a 10-digit phone number without any dashes or spaces"  
+            maxlength="10"  
+            minlength="10" 
+        >
+    </td>
+</tr>
+<tr>
+    <th>Email</th>
+    <td>
+        <input 
+            type="email"  
+            name="email"
+            required 
+            class="form-control" 
+            style="height: 40px;" 
+            value="{% if data['uhotel'] %}{{ data['uhotel'][0]['email'] }}{% endif %}"
+            title="Please enter a valid email address"  
+            placeholder="example@domain.com" 
+        >
+    </td>
+</tr>
+
+		<!-- <tr>
+			<th>Email</th>
+			<td><input type="email" name="email" required class="form-control" style="height: 40px;" value="{% if data['uhotel'] %}{{data['uhotel'][0]['email']}}{% endif %}"></td>
+		</tr> -->
+		<tr>
+			<th>Place</th>
+			<td><input type="text" name="place" required class="form-control" style="height: 40px;" value="{% if data['uhotel'] %}{{data['uhotel'][0]['place']}}{% endif %}"></td>
+		</tr>
+		
+		{% if data['uhotel'] %}
+		<tr>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-warning" name="uphotel" value="UPDATE"></td>
+		</tr>
+		{% else %}
+		<tr>
+			<th>Photo</th>
+			<td><input type="file" name="photo" required class="form-control" style="height: 40px;" value="{% if data['uhotel'] %}{{data['uhotel'][0]['photo']}}{% endif %}"></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" class="btn btn-success" name="hotel" value="ADD"></td>
+		</tr>
+		{% endif %}
+	</table>
+</td>
+<td>
+	<div id="dvMap" style="width: 600px; height: 400px"></div>
+</td>
+</tr>
+</table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+<br>
+	<div style="width:100px;">
+	<table class="table" >
+		
+		<h2>Hotel Details</h2><br>
+		<tr>
+			<th>Hotel Name</th>
+			<th>About</th>
+			
+			<th>Phone</th>
+			<th>Email</th>
+			<th>Photo</th>
+			<th>Place</th>
+		</tr>
+		{% for row in data['view_hotel'] %}
+		<tr>
+			<td>{{row['hotel_name']}}</td>
+			<td>{{row['about']}}</td>
+			
+			<td>{{row['phone']}}</td>
+			<td>{{row['email']}}</td>
+			<td><img style="width: 150px;height: 150px;" src="/{{row['photo']}}"></td>
+			<td>{{row['place']}}</td>
+			<td><a class="btn btn-danger" href="?action=delete&id={{row['hotel_id']}}">Delete</a></td>
+			<td><a class="btn btn-warning" href="?action=update&id={{row['hotel_id']}}">Update</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+	</center>
+</form>
+
+<br><br>
+
+{% include 'footer.html' %}
